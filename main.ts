@@ -7,7 +7,7 @@ for (let index = 0; index < 2; index++) {
     pins.servoWritePin(AnalogPin.P2, 180)
     basic.pause(1000)
 }
-while (true) {
+basic.forever(function () {
     Temp = pins.analogReadPin(AnalogReadWritePin.C16)
     basic.showNumber(Temp)
     if (Temp >= 495) {
@@ -15,4 +15,7 @@ while (true) {
     } else {
         pins.servoWritePin(AnalogPin.P1, 45)
     }
-}
+})
+basic.forever(function () {
+    basic.setLedColor(0xff0080)
+})
