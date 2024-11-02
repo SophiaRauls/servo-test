@@ -10,8 +10,8 @@ for (let index = 0; index < 2; index++) {
     basic.pause(1000)
 }
 basic.forever(function () {
-    Temperatur = pins.analogReadPin(AnalogPin.C17)
-    Feuchte = pins.analogReadPin(AnalogPin.C16)
+    Temperatur = pins.analogReadPin(AnalogPin.C16)
+    Feuchte = pins.analogReadPin(AnalogPin.C17)
     basic.showNumber(Temperatur)
     if (Temperatur >= 495) {
         pins.servoWritePin(AnalogPin.P1, 180)
