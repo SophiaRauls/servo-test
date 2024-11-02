@@ -12,6 +12,11 @@ for (let index = 0; index < 2; index++) {
 basic.forever(function () {
     Temperatur = pins.analogReadPin(AnalogPin.C16)
     Feuchte = pins.analogReadPin(AnalogPin.C17)
+    if (Feuchte > 550) {
+        Wasser = 1
+    } else {
+        Wasser = 0
+    }
     basic.showNumber(Temperatur)
     if (Temperatur >= 495) {
         pins.servoWritePin(AnalogPin.P1, 180)
@@ -20,5 +25,18 @@ basic.forever(function () {
     }
 })
 basic.forever(function () {
-    basic.setLedColor(0xff0080)
+    if (Wasser == 0) {
+        motors.motorCommand(MotorCommand.Coast)
+        basic.turnRgbLedOff()
+    } else if (Wasser == 1) {
+        motors.motorPower(100)
+        basic.setLedColor(0x007fff)
+        basic.pause(10000)
+        motors.motorCommand(MotorCommand.Coast)
+        basic.pause(50000)
+        basic.turnRgbLedOff()
+    } else {
+        motors.motorCommand(MotorCommand.Coast)
+        basic.turnRgbLedOff()
+    }
 })
